@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# Build output
+build/
+
 # Build metadata
 *.gcda
 *.gcno
