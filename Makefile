@@ -29,7 +29,6 @@ coverage: test
 coverage-html: coverage
 	$(MAKE) -C	test 	coverage-html
 
-.PHONY: clean
 clean:
 	$(MAKE) -C	docs 	clean
 	$(MAKE) -C	src		clean
