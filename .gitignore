@@ -37,3 +37,6 @@ build/
 # Build metadata
 *.gcda
 *.gcno
+
+# Generated documentation
+docs/*/
