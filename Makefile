@@ -5,7 +5,16 @@ LDLIBS=
 RM=rm
 BUILD_DIR=./build
 
-.PHONY: lib test
+DOCS_HTML_INDEX_PATH=docs/html/index.html
+
+.PHONY: all
+
+all: lib test docs
+
+docs: $(DOCS_HTML_INDEX_PATH)
+
+$(DOCS_HTML_INDEX_PATH):
+	$(MAKE) -C	docs 	docs
 
 lib:
 	$(MAKE) -C src
@@ -22,6 +31,7 @@ coverage-html: coverage
 
 .PHONY: clean
 clean:
+	$(MAKE) -C	docs 	clean
 	$(MAKE) -C	src		clean
 	$(MAKE) -C	test 	clean
 
