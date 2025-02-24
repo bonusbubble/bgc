@@ -1,9 +1,10 @@
-/*
- * gc - A simple mark and sweep garbage collector for C.
- */
-
 #if !defined(BGC__BGC_H)
 #define BGC__BGC_H
+
+/// @file           bgc.h
+/// @brief          A simple mark and sweep garbage collector for C.
+/// @copyright      Copyright 2025 bonusbubble
+///                 Licensed under GPL-3.0-or-later
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -85,13 +86,13 @@ typedef struct bgc_Array {
 extern bgc_GC *BGC_GLOBAL_GC;
 
 #if !defined(bgc__libc_free)
-/// @brief The C standard library function `free`.
-void (*bgc__libc_free)(void *block) = free;
+/// @brief The C standard library function `free`. Set this to the underlying `free` function to call when managed memory should be freed.
+void (*BGC_LIBC_FREE)(void *block) = free;
 #endif
 
 #if !defined(bgc__libc_malloc)
-/// @brief The C standard library function `malloc`.
-void * (*bgc__libc_malloc)(size_t size) = malloc;
+/// @brief The C standard library function `malloc`. Set this to the underlying `malloc` function to call when managed memory should be allocated.
+void * (*BGC_LIBC_MALLOC)(size_t size) = malloc;
 #endif
 
 /// @brief Run the garbage collector, freeing up any unreachable memory resources that are no longer being used.
