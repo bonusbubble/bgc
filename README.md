@@ -4,10 +4,10 @@ Bubbly Garbage Collector - The garbage collector with personality!
 
 ## Building
 
-To build `bgc`, run the following command from the project's root directory.
+To build `bgc`, run the following command from the project's root directory:
 
 ```sh
-make clean  &&  make
+make clean && make
 ```
 
 ## Installing
