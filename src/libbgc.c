@@ -1,13 +1,13 @@
 #if !defined(BGC__BGC_C)
 #define BGC__BGC_C
 
-#include "bgc.h"
-
 #include <errno.h>
 #include <setjmp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include <bgc.h>
 
 #define LOGLEVEL LOGLEVEL_DEBUG
 
