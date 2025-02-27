@@ -7,12 +7,22 @@ SUDO=sudo
 
 BUILD_DIR=./build
 
+INDEX_HTML=docs/html/index.html
+
+
 .PHONY: all
 
 all: clean lib test
 
+release: all docs
+
 debug: all install examples
 	./examples/hello_world.elf
+
+docs: $(INDEX_HTML)
+
+$(INDEX_HTML):
+	$(SUDO) $(MAKE)	-C	docs	all
 
 lib:
 	$(MAKE) -C src
