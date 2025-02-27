@@ -22,7 +22,7 @@ debug: all install examples
 docs: $(INDEX_HTML)
 
 $(INDEX_HTML):
-	$(SUDO) $(MAKE)	-C	docs	all
+	$(MAKE)	-C	docs	all
 
 lib:
 	$(MAKE) -C src
@@ -46,6 +46,7 @@ coverage-html: coverage
 
 .PHONY: clean
 clean:
+	$(MAKE) -C	docs	clean
 	$(MAKE) -C	examples	clean
 	$(MAKE) -C	src		clean
 	$(MAKE) -C	test 	clean
