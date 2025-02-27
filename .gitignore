@@ -4,6 +4,9 @@ build/
 # Distributable files
 dist/
 
+# Documentation
+docs/
+
 # Prerequisites
 *.d
 
