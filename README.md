@@ -1,5 +1,5 @@
-![Build Status](https://github.com/voidvoxel/bgc/workflows/C/C++%20CI/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/voidvoxel/bgc/badge.svg)](https://coveralls.io/github/voidvoxel/bgc)
+![Build Status](https://github.com/bonusbubble/bgc/workflows/C/C++%20CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/bonusbubble/bgc/badge.svg)](https://coveralls.io/github/bonusbubble/bgc)
 
 # BGC (Bubbly Garbage Collector): mark & sweep garbage collection for C/C++
 
@@ -65,16 +65,16 @@ orangeduck's [tgc](https://github.com/orangeduck/tgc) *(which also follows the i
 
 ### Download, compile and test
 
-    $ git clone git@github.com:voidvoxel/gc.git
-    $ cd gc/src/voidvoxel/garbage_collection
-
-To compile using the `clang` compiler:
-
-    $ make test
+    $ git clone git@github.com:bonusbubble/gc.git
+    $ cd gc/src/bonusbubble/garbage_collection
 
 To use the GNU Compiler Collection *(GCC)*:
 
-    $ make test CC=gcc
+    $ make clean && make && sudo make install && make examples && ./examples/hello_world.elf
+
+To compile using the `clang` compiler:
+
+    $ make clean && make CC=clang && sudo make install && make examples && ./examples/hello_world.elf
 
 The tests should complete successfully. To create the current coverage report:
 

@@ -3,25 +3,30 @@ CFLAGS=-g -Wall -Wextra -pedantic -I./include
 LDFLAGS=-g -L./build/src
 LDLIBS=
 RM=rm
-BUILD_DIR=./build
+SUDO=sudo
 
-DOCS_HTML_INDEX_PATH=docs/html/index.html
+BUILD_DIR=./build
 
 .PHONY: all
 
-all: lib test docs
+all: clean lib test
 
-docs: $(DOCS_HTML_INDEX_PATH)
-
-$(DOCS_HTML_INDEX_PATH):
-	$(MAKE) -C	docs 	docs
+debug: all install examples
+	./examples/hello_world.elf
 
 lib:
 	$(MAKE) -C src
 
-test:
-	$(MAKE) -C $@
+test: test/test_gc
+
+test/test_gc:
+	$(MAKE) -C	test	all
 	$(BUILD_DIR)/test/test_gc
+
+examples: examples/hello_world.elf
+
+examples/hello_world.elf:
+	$(MAKE) -C	examples	all
 
 coverage: test
 	$(MAKE) -C	test 	coverage
@@ -29,8 +34,9 @@ coverage: test
 coverage-html: coverage
 	$(MAKE) -C	test 	coverage-html
 
+.PHONY: clean
 clean:
-	$(MAKE) -C	docs 	clean
+	$(MAKE) -C	examples	clean
 	$(MAKE) -C	src		clean
 	$(MAKE) -C	test 	clean
 
@@ -38,7 +44,7 @@ distclean: clean
 	$(MAKE) -C	test	distclean
 
 install:
-	$(MAKE) -C	src		install
+	$(SUDO) $(MAKE)	-C	src		install
 
 uninstall:
-	$(MAKE) -C	src		uninstall
+	$(SUDO) $(MAKE) -C	src		uninstall

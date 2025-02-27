@@ -1,11 +1,10 @@
 #include <float.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <bgc.h>
 #include "minunit.h"
 
-#include "../src/bgc.h"
-
-#include "../src/libbgc.c"
+#include "../src/bgc.c"
 
 #define UNUSED(x) (void)(x)
 

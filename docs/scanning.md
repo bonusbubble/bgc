@@ -5,7 +5,7 @@ any memory unless it determines that it is no longer *reachable*. In order for
 any allocation to be reachable, there needs to be a pointer in the working
 memory of the program that points to said allocation. The working memory is the
 BSS (we ignore that on purpose), the CPU registers (we dump those on the stack
-before scanning), the stack and all existing (`gc`-managed) allocations on the
+before scanning), the stack and all existing (`bgc`-managed) allocations on the
 heap.
 
 Scanning means that we test each of these memory locations for a pointer to another
@@ -15,7 +15,7 @@ Everything that is not in the transitive closure is then collected.
 Note that there are many ways how each of these steps can be optimized but
 most of these
 optimizations are platfrom/compiler-dependent and therefore out of the scope of
-`gc` (at least currently).
+`bgc` (at least currently).
 
 ## Memory layout of a C program
 
@@ -32,7 +32,7 @@ The key observations for our discussion are
 
 
 There are platforms on which the stack grows towards larger memory addresses
-but we're safe to ignore those for the scope of `gc`.
+but we're safe to ignore those for the scope of `bgc`.
 
 ## Scanning the stack
 
@@ -59,9 +59,9 @@ The code here is straightforward:
 
 1. Declare a local variable `dummy` on the stack such that we can use
    its address as top-of -stack, ie. `stack_sp = &dummy`.
-2. Get the bottom-of-stack from the `gc` instance.
+2. Get the bottom-of-stack from the `bgc` instance.
 3. Iterate over all memory locations between `stack_sp` and `stack_bp` and check
-   if they contain references to known memory locations (`gc_mark_alloc()`
+   if they contain references to known memory locations (`bgc_mark_alloc()`
    queries the allocation map and recursively marks the allocations if the
    pointed-to memory allocations are a known key in the allocation map).
    We do not iterate all the way to `stack_bp` since the last `BGC_PTRSIZE-1` bytes
@@ -125,9 +125,9 @@ void bgc_mark_roots(GarbageCollector* gc)
 }
 ```
 
-## Implementing `gc_mark_alloc()`
+## Implementing `bgc_mark_alloc()`
 
-Taking a closer look at `gc_mark_alloc()` reveals that it is really only a loop
+Taking a closer look at `bgc_mark_alloc()` reveals that it is really only a loop
 that iterates over the memory content of an allocation, attempting to find any
 pointers located within:
 
