@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <bgc.h>
+#include "../include/bgc.h"
 
 bgc_Array * int_array(int length)
 {
