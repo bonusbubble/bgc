@@ -15,8 +15,14 @@ of optimization (PRs welcome!).
 
 The original motivation for `gc` *(the parent fork)* was the original author's desire to write [their own LISP implementation in C](https://github.com/mkirchner/stutter), entirely from scratch - and that required garbage collection.
 
-Ironically enough, my original motivation for `bgc` *(this fork)* is my desire to write [my own programming language](https://github.com/valiant-lang)
-in C, entirely from scratch - and that also required garbage collection.
+Ironically enough, my original motivation for `bgc` *(this fork)* is my desire to write [a sister language for Python in C/C++/Python](https://github.com/bonusbubble/dratinic)
+that compiles to native binaries *(and can be transpiled to C++ for use in other target platforms that support C++)*, and that also required garbage collection.
+While looking for a suitable garbage collection library written in C or C++, I stumbled upon `gc`.
+Although `gc` hadn't been updated in over half a decade, I cloned the repository and compiled it, pleased to find that it worked on Linux, and even on Windows *(after adding a few minor portability tweaks)*, so I decided to start maintaining a fork of `gc`.
+However, I quickly realized that I needed more features than `gc` provided, and my changes would likely lead to breaking compatibility with the original `gc`, so I renamed this fork to `bgc` to allow code using the original `gc` to continue to function alongside this fork by simply renaming this library to `bgc`.
+
+*(Therefore, `bgc` is not compatible with `gc`, but can be used safely alongside it if necessary.)*
+
 
 ### Acknowledgements
 
