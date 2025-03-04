@@ -9,7 +9,7 @@ BUILD_DIR=../build
 INCLUDE_DIR=../include
 
 CFLAGS=-g -Wall -Wextra -pedantic -I$(INCLUDE_DIR) -fprofile-arcs -ftest-coverage
-LDFLAGS=-g -L../build/lib --coverage
+LDFLAGS=-g -L../dist/lib --coverage
 LDLIBS=-lbgc
 
 

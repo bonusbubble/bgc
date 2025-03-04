@@ -1,6 +1,6 @@
 CC=clang
-CFLAGS=-g -Wall -Wextra -pedantic -I../include -fPIC -fprofile-arcs -ftest-coverage
-LDFLAGS=-g -L../build/src -L../build/test --coverage -fPIC
+CFLAGS=-g -Wall -Wextra -pedantic -I../include -fPIC
+LDFLAGS=-g -L../build/src -L../build/test -fPIC
 LDLIBS=
 CP=cp
 MKDIR=mkdir
@@ -12,9 +12,12 @@ ROOT=/usr/local
 
 PROJECT_NAME=bgc
 
-LIB_NAME=lib$(PROJECT_NAME)
-STATIC_LIBRARY=$(LIB_NAME).a
-DYNAMIC_LIBRARY=$(LIB_NAME).so
+LIB_PREFIX=lib
+LIB_NAME=$(LIB_PREFIX)$(PROJECT_NAME)
+STATIC_LIB_EXT=.a
+STATIC_LIBRARY=$(LIB_NAME)$(STATIC_LIB_EXT)
+DYNAMIC_LIB_EXT=.so
+DYNAMIC_LIBRARY=$(LIB_NAME)$(DYNAMIC_LIB_EXT)
 
 STATIC_LIBRARY_PATH=$(DIST_DIR)/lib/$(STATIC_LIBRARY)
 DYNAMIC_LIBRARY_PATH=$(DIST_DIR)/lib/$(DYNAMIC_LIBRARY)
@@ -46,11 +49,9 @@ $(DYNAMIC_LIBRARY_PATH): $(OBJS)
 clean:
 	$(RM) -f $(OBJS) $(DEPS)
 
-distclean: clean
-	$(RM) -f $(DIST_DIR)/lib/$(STATIC_LIBRARY)
-	$(RM) -f $(DIST_DIR)/lib/$(DYNAMIC_LIBRARY)
-	$(RM) -f $(DIST_DIR)/lib/*gcda
-	$(RM) -f $(DIST_DIR)/lib/*gcno
+cleanall: clean
+	rm -rf $(DIST_DIR)
+	mkdir -p $(DIST_DIR)
 
 install: uninstall
 	$(CP) -f $(STATIC_LIBRARY_PATH) $(INSTALL_STATIC_LIBRARY_PATH)
