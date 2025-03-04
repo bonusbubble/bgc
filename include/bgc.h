@@ -132,14 +132,14 @@ typedef struct bgc_Array {
 /// @brief A global instance of the garbage collector for use by single-threaded applications.
 extern bgc_GC *BGC_GLOBAL_GC;
 
-#if !defined(bgc__libc_free)
+#if !defined(BGC__LIBC_FREE)
 /// @brief The C standard library function `free`.
-void (*bgc__libc_free)(void *block) = free;
+#define BGC__LIBC_FREE          free
 #endif
 
-#if !defined(bgc__libc_malloc)
+#if !defined(BGC__LIBC_MALLOC)
 /// @brief The C standard library function `malloc`.
-void * (*bgc__libc_malloc)(size_t size) = malloc;
+#define BGC__LIBC_MALLOC        malloc
 #endif
 
 /// @brief Run the garbage collector, freeing up any unreachable memory resources that are no longer being used.
